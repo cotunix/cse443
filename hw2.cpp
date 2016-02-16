@@ -28,7 +28,7 @@ void gatherDigits(std::string& s, const int pos) {
     int num = 0;
 	int i = 0;
     for (i; i < s.length(); i++){
-		if (i > pos && i < (pos + num - 1)) {
+		if (i >= pos && i < (pos + num)) {
 			continue;
 		}
         if (std::isdigit(s[i])){
