@@ -8,14 +8,17 @@
 
 void putChar(std::string& s, const int targetPos, const int oldPos, const char c, const int num){
     if (oldPos < targetPos) {
-        for (int i = oldPos; i < targetPos; i++){
-            s[i] = s[i+1];
+        for (int i = oldPos; i < targetPos - 1; i++){
+				s[i] = s[i + 1];
+			            
         }
+		s[targetPos - 1] = s[targetPos + num];
         s[targetPos + num] = c;
     }
     else if (targetPos < oldPos) {
-        for (int i = (targetPos + num); i < s.length(); i++){
-            s[i+1] = s[i];
+		int i = oldPos;
+        for (int i = oldPos; i > (targetPos + num); i--){
+				s[i] = s[i - 1];
         }
         s[targetPos + num] = c;
     }
@@ -23,10 +26,16 @@ void putChar(std::string& s, const int targetPos, const int oldPos, const char c
 
 void gatherDigits(std::string& s, const int pos) {
     int num = 0;
-    for (int i = 0; i < s.length(); i++){
+	int i = 0;
+    for (i; i < s.length(); i++){
+		if (i > pos && i < (pos + num - 1)) {
+			continue;
+		}
         if (std::isdigit(s[i])){
             putChar(s,pos,i,s[i], num);
             num++;
+			if (i < pos)
+				i--;
         }
     }
 }
